@@ -72,23 +72,19 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import CrudPage from './components/Crud/CrudPage';
+
 
 
 import "./form.css";
 
 
 function SignIn() {
-    const [showCrudPage, setShowCrudPage] = useState(false); // État pour contrôler l'affichage de CrudPage
-
-    const handleSubmit = () => {
-        // Mettre à jour l'état pour afficher CrudPage
-        setShowCrudPage(true);
-    };
+   
+   
    
     return (
         <div className="form-container">
-            <Form className="form" onSubmit={handleSubmit}>
+            <Form className="form" >
                 <h1 className="text">WELCOME</h1>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>
@@ -121,7 +117,7 @@ function SignIn() {
                     </Col>
                 </Form.Group>
             </Form>
-            {showCrudPage && <CrudPage />} {/* Afficher CrudPage si showCrudPage est vrai */}
+            
         </div>
 
     );

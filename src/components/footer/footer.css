@@ -1,0 +1,120 @@
+/*.Footer{*/
+/*    background:darkgray;*/
+/*    color:  white;*/
+/*    padding:10px 0;*/
+/*    !* margin-top: 39rem; *!*/
+/*    bottom: 0px;*/
+/*    position: fixed;*/
+/*    left: 0;*/
+/*    text-align: center;*/
+/*    width: 100%;*/
+/*    */
+/*}*/
+.Footer {
+    background: darkgray;
+    color: white;
+    padding: 10px 0;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000; /* Assure que le footer est au-dessus de tout autre contenu */
+    transform:translateY(100%) ;
+}
+
+body {
+    margin-bottom: 60px; /* Ajustez cette valeur selon la hauteur de votre footer */
+}
+
+/* Cachez le footer lorsque vous faites défiler vers le haut */
+/*body:not(:hover) .Footer {*/
+/*    transform: translateY(100%);*/
+/*}*/
+
+
+
+
+.ft-1 h3{
+    font-weight:700;
+    font-family: cursive;
+    letter-spacing: 2px;
+    padding:0.5rem 0;
+    font-family: cursive;
+
+}
+
+.ft-1 span{
+   color:#f60838 ; 
+
+}
+
+.ft-1 p{
+    padding: 0rem 5rem 0.8rem 0;
+    font-weight: 500;
+
+}
+.footer-icons i{
+    padding:0.4rem 0.5rem;
+    background: #e1e1e1;
+    color:#f60838;
+    margin: 0 0.5rem;
+    border-radius: 50%;
+}
+
+.footer-icons i:hover{
+
+    background: #f60838;
+    color:#fff;
+    transition:0.6s ;
+    cursor: pointer;
+    
+}
+
+.Footer h5{
+    color:#f60838;
+}
+
+.ft-2 ul{
+    list-style:none ;
+    padding-left: 0;
+
+}
+
+.ft-2 ul li{
+   padding: 0.35rem 0;
+   font-weight: 500;
+
+}
+.ft-2 ul a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.06rem;
+ 
+ }
+
+ .ft-3 p{
+    font-weight: 500;
+    padding: 0.1rem 0;
+    font-size: 1.06rem;
+ }
+ .ft-3 i{
+    padding-right: 0.5rem;
+   
+ 
+ }
+ .ft-2 h5{
+    margin-top: 8px;
+    margin-left: 80px;
+ }
+ .ft-3 h5{
+    margin-top: 8px;
+    margin-left: 130px;
+
+ }
+ .ft-3 p{
+    margin-left: 110px;
+    margin-top: 15px;
+ }
+ .nav-item{
+    margin-left: 80px;
+
+ }

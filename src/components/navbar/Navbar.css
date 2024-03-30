@@ -1,0 +1,18 @@
+.barre{
+    max-width: 100%;
+    margin: 0;
+    font-size: 17px;
+}
+
+.me-auto{
+   
+    font-size: 17px;
+    margin-left: 15px;
+}
+.logo{
+    margin-left: 10px;
+}
+.login{
+    margin-right:8px;
+    font-size: 17px;
+}

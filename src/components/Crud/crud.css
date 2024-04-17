@@ -270,7 +270,7 @@ margin-left: 2px;
    }*/
    .pagination {
     position: absolute;
-    bottom: -35px; /* Ajustez la position verticale selon vos besoins */
+    bottom: -8px; /* Ajustez la position verticale selon vos besoins */
     left: 64.7%; /* Centre la pagination horizontalement */
     transform: translateX(-50%); /* Ajuste le centrage */
    
@@ -289,8 +289,10 @@ margin-left: 2px;
     color: white;
     font-size:16px;
 }
-.addButton {
-    text-align: right;
+.test {
+   margin-left: 1230%;
+   margin-bottom: 400%;
+
   }
 
 

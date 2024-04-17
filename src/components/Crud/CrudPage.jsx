@@ -793,13 +793,11 @@ function CrudPage() {
   };
 
 
- 
-
 
   return (
     <div className="table-wrapper">
-      <div className="add-button">
-        <Button variant="primary" onClick={handleShowForm}>Ajouter</Button> 
+      <div >
+        <Button className="test" variant="primary" onClick={handleShowForm}>Ajouter</Button> 
       </div>
       <AddDepartmentForm show={showForm} handleClose={handleCloseForm} /> 
 
@@ -818,8 +816,8 @@ function CrudPage() {
               <td>{item.nom}</td>
               <td>
                 <Button variant="warning"  className='ms-1 sh' onClick={() => handleShowPopup(item.id, item.nom)}>Show</Button>{' '}
-                <Button variant="success" className='ms-1 mo' onClick={() => handleShowEditPopup(item.id, item.nom)}>Modifier</Button>{' '}
-                <Button variant="danger"  className='ms-1 su' onClick={() => handleDelete(item.id)}>Supprimer</Button>{' '}
+                <Button variant="success"  className='ms-1 mo' onClick={() => handleShowEditPopup(item.id, item.nom)}>Modifier</Button>{' '}
+                <Button variant="danger"   className='ms-1 su' onClick={() => handleDelete(item.id)}>Supprimer</Button>{' '}
               </td>
             </tr>
           ))}

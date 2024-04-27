@@ -64,9 +64,7 @@ import FooterPage from './components/footer/FooterPage';
 import SignIn from './components/forms/SignIn';
 import Body from './components/body/body';
 import CrudPage from './components/Crud/CrudPage';
-
-import NavbarAdmin from './navbar admin/NavbarAdmin';
-
+import NavbarAdmin from './components/navbar admin/NavbarAdmin';
 
 
 
@@ -78,12 +76,12 @@ function App() {
         
             <Routes>
            
-            <Route path="/SignIn"  element={<><NavbarPage /><SignIn /></>} />
+            <Route path="/SignIn" element={<><NavbarPage /><SignIn /></>} />
             <Route path="/"  element={<><NavbarPage /></>} />
 
                 <Route path="/Crud" element={<CrudPage />} />
                 <Route path="/admin" element={<NavbarAdmin />} />
-               
+
               
                
             </Routes>

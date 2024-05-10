@@ -1,38 +1,50 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import './Navbar.css';
-
-
-
-
+import React, { useContext } from 'react';
+import { AuthContext } from "../../context/AuthContext";
+import { BiBell, BiEnvelope } from 'react-icons/bi';
+import { Container, Nav, Navbar, NavDropdown, Form, } from 'react-bootstrap';
+import { RoleContext } from '../../context/RoleContext';
+import Image from '../navbar/admin.png'
 function NavbarPage() {
+  const { dispatch } = useContext(AuthContext);
+  const { currentRole } = useContext(RoleContext);
+
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+  }
 
   return (
-    
-     <Navbar bg="dark" variant="dark" expand="lg">
-
-      <Container className='barre'>
-             <Navbar.Brand className='logo' href="#">LOGO</Navbar.Brand>
-             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-             <Navbar.Collapse id="basic-navbar-nav">
-                 <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>0
-                    <Nav.Link href="#profile"></Nav.Link>
-    
+    <>
+      <div className="navbar-container navbar-custom t-dark">
+        <Navbar sticky="top">
+          <Container>
+            <Navbar.Brand className="logo" >LOGO</Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll" className="justify-content-between">
+              <Form className="d-flex">
+                <Form.Control
+                  type="text"
+                  placeholder="Search"
+                  className=""
+                />
+              </Form>
+              <Navbar.Text>
+                <Nav className="me-auto my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
+                  <Nav.Link href="#messages"><BiEnvelope /></Nav.Link>
+                  <Nav.Link href="#notifications"><BiBell /></Nav.Link>
+                  <Nav.Link >{currentRole}</Nav.Link>
+                  <Nav.Link ><img width="40px" heigth="40px" style={{borderRadius:"30px"}}src={Image} alt='image' /></Nav.Link>
+                  <NavDropdown title="Actions" id="navbarScrollingDropdown">
+                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action">Something else</NavDropdown.Item>
+                  </NavDropdown>
                 </Nav>
-         
-                 <Nav className="login">
-                    <Nav.Link href="SignIn">SignIn</Nav.Link>
-         
-                 </Nav>
-
-                
-              </Navbar.Collapse>
-      </Container>
-     </Navbar>
- 
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </div>
+    </>
   );
 }
 

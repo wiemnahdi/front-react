@@ -2,8 +2,8 @@ import React from 'react';
 import "./footer.css"
 function FooterPage() {
   return (
-    <div className="Footer bg-dark">
-      <div className='container '>
+    <div className=" Footer bg-dark ">
+      <div className='container'>
        <div className='row'>
         <div className="col-md-6 col-lg-5 col-12 ft-1">
         <h3><span>ABOUT</span>COMPANY</h3>

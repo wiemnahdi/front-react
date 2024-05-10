@@ -1,28 +1,12 @@
-/*.Footer{*/
-/*    background:darkgray;*/
-/*    color:  white;*/
-/*    padding:10px 0;*/
-/*    !* margin-top: 39rem; *!*/
-/*    bottom: 0px;*/
-/*    position: fixed;*/
-/*    left: 0;*/
-/*    text-align: center;*/
-/*    width: 100%;*/
-/*    */
-/*}*/
+
 .Footer {
     background: darkgray;
     color: white;
     padding: 10px 0;
-    position: sticky;
     bottom: 0;
-    width: 100%;
-    z-index: 1000; /* Assure que le footer est au-dessus de tout autre contenu */
-    transform:translateY(100%) ;
-}
 
-body {
-    margin-bottom: 60px; /* Ajustez cette valeur selon la hauteur de votre footer */
+    z-index: 1000; 
+    
 }
 
 /* Cachez le footer lorsque vous faites défiler vers le haut */

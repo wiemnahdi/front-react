@@ -1,3 +1,14 @@
+.navbar-custom{
+    background-color:#EAEAEA;
+    position: fixed;
+    top:0;
+    left: 0;
+    right:0;
+
+    z-index: 1;
+
+   
+}
 .barre{
     max-width: 100%;
     margin: 0;
@@ -8,9 +19,6 @@
    
     font-size: 17px;
     margin-left: 15px;
-}
-.logo{
-    margin-left: 10px;
 }
 .login{
     margin-right:8px;

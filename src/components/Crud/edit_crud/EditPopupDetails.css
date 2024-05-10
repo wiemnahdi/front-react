@@ -1,0 +1,8 @@
+.custom-input {
+    margin-bottom: 8px; /* Ajoute un espace de 10 pixels en bas */
+    
+    width: 350px; /* Ajustez la largeur selon vos besoins */
+    height: 40px; /* Ajustez la hauteur selon vos besoins */
+    font-size: 14px; /* Ajustez la taille de la police selon vos besoins */
+ 
+  }

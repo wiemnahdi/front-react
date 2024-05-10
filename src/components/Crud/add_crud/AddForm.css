@@ -1,0 +1,166 @@
+.input-container input[type="text"] {
+    margin-bottom: 8px; /* Ajoute un espace de 10 pixels en bas */
+    
+        width: 350px; /* Ajustez la largeur selon vos besoins */
+        height: 40px; /* Ajustez la hauteur selon vos besoins */
+        font-size: 14px; /* Ajustez la taille de la police selon vos besoins */
+     
+  }
+
+  .button-container {
+   
+      display: flex;
+      justify-content: flex-end; /* Aligner les boutons à gauche */
+      margin-top: 10px; /* Ajouter un espace en haut des boutons */
+     
+    
+  }
+
+  .dark-modal .modal-content {
+    background-color: black;
+    border: 1px solid red;
+    color: white; 
+  }
+  
+  .dark-modal .close-button {
+    width: 20px;
+    height: 20px;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) .9s;
+    cursor: pointer;
+  }
+  
+  .dark-modal .close-button:hover {
+    color: red;
+    width: 22px;
+    height: 22px;
+  }
+  
+  .dark-modal .custom-input {
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid red;
+  }
+  
+  .dark-modal .custom-input:hover {
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid red;
+  }
+  
+  .dark-modal .custom-input:focus {
+    outline: none;
+    box-shadow: none;
+    border-bottom: 2px solid red;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  .upload-certificate-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #EEEEEE;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #E8E8E8;
+    padding: 15px;
+  }
+  
+  .upload-certificate-form h3 {
+    text-align: center;
+   margin-bottom: 40px;
+    
+  }
+
+  .upload-certificate-form >.title {
+    text-align: center;
+    background-color: #EEEEEE;
+    padding-top: 20px;
+    height:70px;
+   margin-bottom: 40px;
+    
+  }
+  
+  .upload-certificate-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .upload-certificate-form input[type="text"],
+  .upload-certificate-form input[type="date"],
+  .upload-certificate-form input[type="file"],
+  .upload-certificate-form input[type="button"]{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #D9D9D9;
+  }
+
+  .upload-certificate-form button{
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #D9D9D9;
+  }
+
+  .upload-certificate-form span{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #D9D9D9;
+    
+  }
+
+  .choose-file{
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    gap: 15px;
+  }
+  
+  
+  .upload-certificate-form button[type="submit"] {
+    background-color: #0C6FA6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .upload-certificate-form button[type="submit"]:hover {
+    background-color: #0C6FA6;
+  }
+  
+  
+  
+  
+
+
+
+ 
+  
+  

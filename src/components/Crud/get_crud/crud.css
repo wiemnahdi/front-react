@@ -1,0 +1,5 @@
+.rounded-table {
+    border-radius: 10px; 
+    border:2px  black/* ou toute autre valeur de rayon souhaitée */
+    /* pour s'assurer que les coins arrondis sont visibles */
+  }

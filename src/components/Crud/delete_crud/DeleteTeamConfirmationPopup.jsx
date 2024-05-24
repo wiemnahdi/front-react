@@ -3,14 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function DeleteConfirmationPopup({ show, handleClose, handleConfirm, data }) {
- 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Confirm Validate Notation</Modal.Title>
+        <Modal.Title>Confirm Delete</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Are you sure you want to validate the note {data?.noteAssigne} in the Competence {data?.competence?.titre} To the user {data?.notedUser.username} added by {data?.teamLeader.username} ?</p>
+        <p>Are you sure to delete Team {data?.nom} with id {data?.id} ?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

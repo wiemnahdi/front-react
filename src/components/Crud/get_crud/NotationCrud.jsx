@@ -12,9 +12,13 @@ import axios from 'axios'
 import { AuthContext } from '../../../context/AuthContext';
 import { server_uri } from '../../../config/config';
 
+import { RoleContext } from '../../../context/RoleContext';
+
 import AddForm from '../add_crud/AddNoteForm';
 
 function CrudPage() {
+
+    const { currentRole } = useContext(RoleContext)
 
     const [currentPage, setCurrentPage] = useState(1);
     const [data, setData] = useState([]);
@@ -45,7 +49,7 @@ function CrudPage() {
     const [popupInfo, setPopupInfo] = useState(null);
 
     //add
-    
+
     const [showAdd, setShowAdd] = useState(false);
 
     const handleShowPopup = (item) => {
@@ -87,7 +91,7 @@ function CrudPage() {
         //request validate data 
 
         try {
-            await axios.put(`${server_uri}/certificate/${itemToValidate.id}/validate`, {}, {
+            await axios.put(`${server_uri}/notation/${itemToValidate.id}/validate`, {}, {
                 headers: {
                     'Authorization': `Bearer ${currentUser}`,
                     'Content-Type': 'application/json'
@@ -102,40 +106,40 @@ function CrudPage() {
     const handleSave = async ({ noteAssigne, competence, employee }) => {
         console.log({ noteAssigne, competence, employee })
         try {
-          const response  = await axios.post(`${server_uri}/notation/${employee}/${competence}`, { noteAssigne}, {
-            headers: {
-              Authorization: `Bearer ${currentUser}`
-            },
-          });
-          setData([response.data,...data])
+            const response = await axios.post(`${server_uri}/notation/${employee}/${competence}`, { note:noteAssigne }, {
+                headers: {
+                    Authorization: `Bearer ${currentUser}`
+                },
+            });
+            setData([response.data, ...data])
         } catch (err) {
-          console.error(err);
+            console.error(err);
         }
-    
+
         setShowEditPopupDetails(false);
-      };
+    };
 
     const handleUpdateData = async (id, note) => {
         const newData = data.map(item => {
-          if (item.id === id) {
-            return { ...item, noteAssigne:note };
-          }
-    
-          return item;
+            if (item.id === id) {
+                return { ...item, noteAssigne: note };
+            }
+
+            return item;
         });
         setData(newData);
         try {
-          await axios.put(`${server_uri}/notation/${id}`, { note }, {
-            headers: {
-              Authorization: `Bearer ${currentUser}`
-            },
-          });
+            await axios.put(`${server_uri}/notation/${id}`, { note }, {
+                headers: {
+                    Authorization: `Bearer ${currentUser}`
+                },
+            });
         } catch (err) {
-          console.error(err);
+            console.error(err);
         }
-    
+
         setShowEditPopupDetails(false);
-      };
+    };
 
     const { currentUser } = useContext(AuthContext)
 
@@ -190,7 +194,9 @@ function CrudPage() {
         <div className="table-wrapper mt-5 ms-3 me-3">
             <h4>Notation</h4>
             <div className=" d-flex justify-content-end mb-3 ">
-                <Button className='me-3' variant="primary" onClick={()=>setShowAdd(true)}>Create</Button>
+                {currentRole != "DEPARTEMENT_CHEF" &&
+                    <Button className='me-3' variant="primary" onClick={() => setShowAdd(true)}>Create</Button>
+                }
             </div>
 
 
@@ -218,13 +224,17 @@ function CrudPage() {
 
                             <td>
                                 <Button variant="warning" className='ms-1 mb-1 sh' onClick={() => handleShowPopup(item)}>Show</Button>
-                                
+
 
                                 {!item.verified &&
-                                <>
-                                     <Button variant="success" className='ms-1 mb-1 sh' onClick={() => handleShowEditPopupDetails(item)}>Update</Button>
-                                    <Button variant="danger" className='ms-1  mb-1  su' onClick={() => handleConfirm(item)} disabled={item.verified} >validate</Button>
-                                </>
+                                    <>
+                                        {currentRole != "DEPARTEMENT_CHEF" &&
+                                            <Button variant="success" className='ms-1 mb-1 sh' onClick={() => handleShowEditPopupDetails(item)}>Update</Button>
+                                        }
+                                        {currentRole != "TEAM_LEADER" &&
+                                            <Button variant="danger" className='ms-1  mb-1  su' onClick={() => handleConfirm(item)} disabled={item.verified} >validate</Button>
+                                        }
+                                    </>
                                 }
                             </td>
                         </tr>
@@ -233,7 +243,7 @@ function CrudPage() {
             </Table>
 
             {showPopup && <ShowPopupDetails show={showPopup} handleClose={handleClosePopup} data={popupInfo} />}
-            
+
             <AddForm
                 show={showAdd}
                 handleClose={() => setShowAdd(false)}
@@ -241,7 +251,7 @@ function CrudPage() {
                 competences={competences}
                 employees={employees}
             />
-            
+
             <ConfirmationPopup
                 show={showConfirmation}
                 handleClose={() => setShowConfirmation(false)}

@@ -4,10 +4,10 @@ import "./styles.css";
 import HomePage from "../../pages/HomePage";
 import NavbarPage from "../navbar/NavbarPage";
 import { RoleContext } from "../../context/RoleContext";
-import { HouseDoorFill, Building, FileEarmarkRichtext, Collection, PersonCircle,PersonAdd, List } from 'react-bootstrap-icons';
-import { isAuthorize } from "../../config/config"; // Importez la fonction isHauthorize depuis votre fichier d'utilitaires d'autorisation
+import { HouseDoorFill, Building, FileEarmarkRichtext, Collection, PersonCircle,PeopleFill, List } from 'react-bootstrap-icons';
+import { isAuthorize } from "../../config/config"; 
 
-const navItems = ["dashboard", "departement", "formation", "competence", "certificate", "notation","addUser", "profile"]; // Ajoutez "certificate" à la liste navItems
+const navItems = ["dashboard","users", "departement", "formation","team", "competence", "certificate", "notation"]; // Ajoutez "certificate" à la liste navItems
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -42,9 +42,10 @@ export const Sidebar = () => {
                   {item === "formation" && <FileEarmarkRichtext />}
                   {item === "competence" && <Collection />}
                   {item === "notation" && <List />}
-                  {item === "profile" && <PersonCircle />}
+                  {item === "users" && <PersonCircle />}
+                  {item === "team" && <PeopleFill />}
                   {item === "certificate" && <FileEarmarkRichtext />} 
-                  {item === "addUser" && <PersonAdd />}
+                  
                   
                   <p>{item}</p>
                 </button>

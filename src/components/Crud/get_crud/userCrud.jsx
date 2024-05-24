@@ -2,15 +2,16 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import AddForm from '../add_crud/AddDepartmentForm'; // Mise à jour du chemin d'importation
-import ShowPopupDetails from '../show/ShowPopupDepartementDetails'; // Mise à jour du chemin d'importation
-import EditPopupDetails from '../edit_crud/EditPopupDepartmentDetails'; // Mise à jour du chemin d'importation
-import DeleteConfirmationPopup from '../delete_crud/DeleteDepartmentConfirmationPopup';
+import ShowPopupDetails from '../show/ShowPopupUserDetails'; // Mise à jour du chemin d'importation
+import EditPopupDetails from '../edit_crud/EditPopupUserDetails'; // Mise à jour du chemin d'importation
+import DeleteConfirmationPopup from '../delete_crud/deleteUserConfirmationPopup';
 import { useContext, useEffect, useState } from 'react';
 import './crud.css';
 
 import axios from 'axios'
 import { AuthContext } from '../../../context/AuthContext';
 import { server_uri } from '../../../config/config';
+import { useNavigate } from 'react-router-dom';
 
 function CrudPage() {
 
@@ -35,10 +36,9 @@ function CrudPage() {
       setCurrentPage(currentPage + 1);
     }
   };
-
-  const [showForm, setShowForm] = useState(false);
-  const handleShowForm = () => setShowForm(true);
-  const handleCloseForm = () => setShowForm(false);
+const navigate = useNavigate()
+  const handleAddUser = () => navigate('/addUser');
+ 
 
   const [showPopup, setShowPopup] = useState(false);
   const [popupInfo, setPopupInfo] = useState(null);
@@ -62,21 +62,6 @@ function CrudPage() {
 
   const handleCloseEditPopup = () => setShowEditPopup(false);
 
-  const handleAdd = async ({ nomDepart, chefDepart }) => {
-    handleCloseForm();
-    try {
-      // Convertir chefDepart en entier si nécessaire
-      chefDepart = parseInt(chefDepart);
-      const response = await axios.post(`${server_uri}/departement`, { nomDepart, chefDepart }, {
-        headers: {
-          Authorization: `Bearer ${currentUser}`
-        },
-      });
-      setData([...data, response.data]);
-    } catch (err) {
-      console.error(err);
-    }
-  };
   
 
 const [chefs, setChefs] = useState([]);
@@ -84,30 +69,34 @@ const [chefs, setChefs] = useState([]);
 const [allTeams,setAllTeams] = useState([]);
 
 
-const handleUpdateData = async (id, { nomDepart, chefDepart, deselectedTeams ,selectedTeams}) => {
-  console.log({ nomDepart, chefDepart, deselectedTeams ,selectedTeams});
-
-  const newChef = chefs.find(chef => chef.id == chefDepart);
-  const newTeams = allTeams.filter(team => selectedTeams.includes(team.id));
+const handleUpdateData = async (id, {firstname,lastname,email,password,role} ) => {
+ 
+  
+  const updateFields = (item, fieldsToUpdate) => {
+    const updatedItem = { ...item };
+    for (const [key, value] of Object.entries(fieldsToUpdate)) {
+      if (value !== null && value !== undefined && value !== '') {
+        updatedItem[key] = value;
+      }
+    }
+    return updatedItem;
+  };
   
   const newData = data.map(item => {
     if (item.id === id) {
-      return { ...item, nomDepart, chefDepart:newChef, teams:newTeams };
+      return updateFields(item, { firstname, lastname, email, password, role });
     }
     return item;
   });
-
-  console.log(newData)
-
-  setData(newData); // Update the state with the modified data
+  
+  setData(newData);
 
   try {
-    const response = await axios.put(`${server_uri}/departement/${id}`, { nomDepart, chefDepart, teams:selectedTeams,deselectedTeams}, {
+     await axios.put(`${server_uri}/users/${id}`, {firstname,lastname,email,password,role}, {
       headers: {
         Authorization: `Bearer ${currentUser}`
       }
     });
-    console.log(response);
   } catch (err) {
     console.error(err);
   }
@@ -121,16 +110,18 @@ const handleUpdateData = async (id, { nomDepart, chefDepart, deselectedTeams ,se
 
   const handleConfirmDelete = async () => {
     const newData = data.filter(item => item.id !== itemToDelete.id);
-    setData(newData);
+    
     setShowDeleteConfirmation(false);
     try {
-      await axios.delete(`${server_uri}/departement/${itemToDelete.id}`, {
+      await axios.delete(`${server_uri}/users/${itemToDelete.id}`, {
         headers: {
           Authorization: `Bearer ${currentUser}`
         },
       });
+      setData(newData);
     } catch (err) {
       console.error(err);
+      err.response?.data?alert(err.response?.data):alert("probleme when deleting user")
     }
   };
 
@@ -139,7 +130,7 @@ const handleUpdateData = async (id, { nomDepart, chefDepart, deselectedTeams ,se
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`${server_uri}/departement`, {
+        const response = await axios.get(`${server_uri}/users`, {
           headers: {
             Authorization: `Bearer ${currentUser}`
           },
@@ -150,60 +141,28 @@ const handleUpdateData = async (id, { nomDepart, chefDepart, deselectedTeams ,se
         console.error(err);
       }
     };
-    
-    const getAllChefDepartement =async () => {
-      try {
-       
-        const response = await axios.get(`${server_uri}/departementchef`, {
-          headers: {
-            Authorization: `Bearer ${currentUser}`
-          },
-        });
-        setChefs(response.data);
-       
- 
-      } catch (err) {
-        console.error(err);
-      }
-    };
 
-    const getAllTeams = async () => {
-      try {
-       
-        const response = await axios.get(`${server_uri}/team`, {
-          headers: {
-            Authorization: `Bearer ${currentUser}`
-          },
-        });
-        setAllTeams(response.data);
-       
- 
-      } catch (err) {
-        console.error(err);
-      }
-    };
+   
     getData();
-   getAllChefDepartement();
-    getAllTeams();
   }, []);
 
- 
 
   return (
     <div className="table-wrapper mt-5 ms-3 me-3">
-      <h4>Departments</h4>
+      <h4>Users</h4>
       <div className=" d-flex justify-content-end mb-3 ">
-        <Button className='me-3' variant="primary" onClick={handleShowForm}>Create</Button>
+        <Button className='me-3' variant="primary" onClick={handleAddUser}>Add user</Button>
       </div>
-      <AddForm show={showForm} handleClose={handleCloseForm} allTeamsData={allTeams} chefs={chefs} handleAdd={handleAdd} />
+      
 
       <Table striped bordered hover border={3} className='table-container rounded-table'>
         <thead className='th thead-light'>
           <tr>
             <th>ID</th>
-            <th>Department Name</th>
-            <th>Demartement Head</th>
-            <th>Teams</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -211,15 +170,10 @@ const handleUpdateData = async (id, { nomDepart, chefDepart, deselectedTeams ,se
           {currentItems.map(item => (
             <tr key={item.id}>
               <td>{item.id}</td>
-              <td>{item.nomDepart}</td>
-              <td>{item.chefDepart.username}</td>
-              <td>
-                <ul>
-                  {item.teams?.map((team) => (
-                    <li key={team.id}>{team.nom}</li>
-                  ))}
-                </ul>
-              </td>
+              <td>{item.firstname}</td>
+              <td>{item.lastname}</td>
+              <td>{item.email}</td>
+              <td>{item.role}</td>
               <td>
                 <Button variant="warning" className='ms-1 mb-1 sh' onClick={() => handleShowPopup(item)}>Show</Button>{' '}
                 <Button variant="success" className='ms-1 mb-1 mo' onClick={() => handleShowEditPopup(item)}>Update</Button>{' '}
@@ -231,7 +185,7 @@ const handleUpdateData = async (id, { nomDepart, chefDepart, deselectedTeams ,se
       </Table>
 
       <ShowPopupDetails show={showPopup} handleClose={handleClosePopup} data={popupInfo} />
-      <EditPopupDetails show={showEditPopup} handleClose={handleCloseEditPopup} data={editPopupInfo} allTeamsData={allTeams} handleSave={handleUpdateData} />
+      <EditPopupDetails show={showEditPopup} handleClose={handleCloseEditPopup} data={editPopupInfo}  handleSave={handleUpdateData} />
       <DeleteConfirmationPopup
         show={showDeleteConfirmation}
         handleClose={() => setShowDeleteConfirmation(false)}

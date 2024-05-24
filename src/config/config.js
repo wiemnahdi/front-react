@@ -2,16 +2,10 @@ export const server_uri = 'http://localhost:8080/api/v1';
 
 
 const Role = {
-    USER: {
-        dashboard: 'dashboard',
-        profile:'profile',
-    },
-
     ADMIN: {
         dashboard: 'dashboard',
-        profile:'profile',
         departement: 'departement',
-        teamleader: 'teamleader',
+        users: 'users',
         team: 'team',
         employe: 'employe',
         notation: 'notation',
@@ -23,20 +17,17 @@ const Role = {
 
     DEPARTEMENT_CHEF: {
         dashboard: 'dashboard',
-        profile:'profile',
         team: 'team',
-        teamleader: 'teamleader',
-        formation: 'formation'
+        notation: 'notation',
+        certificate:'certificate',
     },
 
     TEAM_LEADER: {
         dashboard: 'dashboard',
-        profile:'profile',
         competence: 'competence',
         notation: 'notation',
         formation: 'formation',
         employe: 'employe',
-        certificate: 'certificate',
     },
 
     EMPLOYE: {

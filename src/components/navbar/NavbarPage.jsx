@@ -32,11 +32,13 @@ function NavbarPage() {
                   <Nav.Link href="#messages"><BiEnvelope /></Nav.Link>
                   <Nav.Link href="#notifications"><BiBell /></Nav.Link>
                   <Nav.Link >{currentRole}</Nav.Link>
-                  <Nav.Link ><img width="40px" heigth="40px" style={{borderRadius:"30px"}}src={Image} alt='image' /></Nav.Link>
+                  <Nav.Link ><img width="40px" heigth="40px" style={{ borderRadius: "30px" }} src={Image} alt='image' /></Nav.Link>
                   <NavDropdown title="Actions" id="navbarScrollingDropdown">
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                    {/*
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action">Something else</NavDropdown.Item>
+                    */}
+
                   </NavDropdown>
                 </Nav>
               </Navbar.Text>
